@@ -25,18 +25,18 @@ type AssetReportItem struct {
 type AssetReportAccount struct {
 	AccountID string `json:"account_id"`
 	Balances  struct {
-		Available              int    `json:"available"`
-		Current                int    `json:"current"`
-		IsoCurrencyCode        string `json:"iso_currency_code"`
-		Limit                  int    `json:"limit"`
-		UnofficialCurrencyCode string `json:"unofficial_currency_code"`
+		Available              float64 `json:"available"`
+		Current                float64 `json:"current"`
+		IsoCurrencyCode        string  `json:"iso_currency_code"`
+		Limit                  int     `json:"limit"`
+		UnofficialCurrencyCode string  `json:"unofficial_currency_code"`
 	} `json:"balances"`
 	DaysAvailable      int `json:"days_available"`
 	HistoricalBalances []struct {
-		Current                int    `json:"current"`
-		Date                   string `json:"date"`
-		IsoCurrencyCode        string `json:"iso_currency_code"`
-		UnofficialCurrencyCode string `json:"unofficial_currency_code"`
+		Current                float64 `json:"current"`
+		Date                   string  `json:"date"`
+		IsoCurrencyCode        string  `json:"iso_currency_code"`
+		UnofficialCurrencyCode string  `json:"unofficial_currency_code"`
 	} `json:"historical_balances"`
 	Mask         string `json:"mask"`
 	Name         string `json:"name"`
