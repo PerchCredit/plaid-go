@@ -15,11 +15,11 @@ type AssetReport struct {
 }
 
 type AssetReportItem struct {
-	Accounts        []Account `json:"accounts"`
-	DateLastUpdated string    `json:"date_last_updated"`
-	InstitutionID   string    `json:"institution_id"`
-	InstitutionName string    `json:"institution_name"`
-	ItemID          string    `json:"item_id"`
+	Accounts        []AssetReportAccount `json:"accounts"`
+	DateLastUpdated string               `json:"date_last_updated"`
+	InstitutionID   string               `json:"institution_id"`
+	InstitutionName string               `json:"institution_name"`
+	ItemID          string               `json:"item_id"`
 }
 
 type AssetReportAccount struct {
