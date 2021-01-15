@@ -99,7 +99,7 @@ func (c *Client) GetAssetReport(assetReportToken string) (resp GetAssetReportRes
 	return resp, err
 }
 
-func (c *Client) CreateAssetReport(itemAccessTokens []string, daysRequested int) (resp GetAssetReportResponse, err error) {
+func (c *Client) CreateAssetReport(itemAccessTokens []string, daysRequested int) (resp CreateAssetReportResponse, err error) {
 	if itemAccessTokens == nil || len(itemAccessTokens) == 0 {
 		return resp, errors.New("/asset_report/create - asset report token must be specified")
 	}
