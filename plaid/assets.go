@@ -91,7 +91,7 @@ type GetAssetReportResponse struct {
 }
 
 type createAssetReportRequest struct {
-	ClientID      string   `json:"client_user_id"`
+	ClientID      string   `json:"client_id"`
 	Secret        string   `json:"secret"`
 	AccessTokens  []string `json:"access_tokens"`
 	DaysRequested int      `json:"days_requested"`
