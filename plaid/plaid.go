@@ -7,8 +7,6 @@ import (
 	"io"
 	"net/http"
 	"strings"
-
-	"github.com/plaid/plaid-go/internal"
 )
 
 // APIVersion holds the latest version of the Plaid API
@@ -72,7 +70,7 @@ func (c *Client) newRequest(endpoint string, body io.Reader, v interface{}) (*ht
 	}
 
 	req.Header.Add("Content-Type", "application/json")
-	req.Header.Add("User-Agent", "Plaid Go v"+internal.Version)
+	req.Header.Add("User-Agent", "Perch Credit Plaid Go")
 
 	// Add header for Plaid API version
 	req.Header.Add("Plaid-Version", APIVersion)

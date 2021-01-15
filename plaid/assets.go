@@ -44,6 +44,19 @@ type GetAssetReportResponse struct {
 	Warnings []string    `json:"warnings"`
 }
 
+type createAssetReportRequest struct {
+	ClientID      string   `json:"client_user_id"`
+	Secret        string   `json:"secret"`
+	AccessTokens  []string `json:"access_tokens"`
+	DaysRequested int      `json:"days_requested"`
+}
+
+type CreateAssetReportResponse struct {
+	AssetReportToken string `json:"asset_report_token"`
+	AssetReportID    string `json:"asset_report_id"`
+	RequestID        string `json:"request_id"`
+}
+
 type removeAssetReportRequest struct {
 	ClientID         string `json:"client_id"`
 	Secret           string `json:"secret"`
@@ -83,6 +96,26 @@ func (c *Client) GetAssetReport(assetReportToken string) (resp GetAssetReportRes
 	}
 
 	err = c.Call("/asset_report/get", jsonBody, &resp)
+	return resp, err
+}
+
+func (c *Client) CreateAssetReport(itemAccessTokens []string, daysRequested int) (resp GetAssetReportResponse, err error) {
+	if itemAccessTokens == nil || len(itemAccessTokens) == 0 {
+		return resp, errors.New("/asset_report/create - asset report token must be specified")
+	}
+
+	jsonBody, err := json.Marshal(createAssetReportRequest{
+		ClientID:      c.clientID,
+		Secret:        c.secret,
+		AccessTokens:  itemAccessTokens,
+		DaysRequested: daysRequested,
+	})
+
+	if err != nil {
+		return resp, err
+	}
+
+	err = c.Call("/asset_report/create", jsonBody, &resp)
 	return resp, err
 }
 
