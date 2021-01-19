@@ -99,17 +99,17 @@ type createAssetReportRequest struct {
 }
 
 type CreateAssetReportOptions struct {
-	ClientReportID string `json:"client_report_id"`
-	Webhook        string `json:"webhook"`
+	ClientReportID string `json:"client_report_id,omitemtpy"`
+	Webhook        string `json:"webhook,omitemtpy"`
 	User           struct {
-		ClientUserID string `json:"client_user_id"`
-		FirstName    string `json:"first_name"`
-		LastName     string `json:"last_name"`
-		MiddleName   string `json:"middle_name"`
-		Ssn          string `json:"ssn"`
-		PhoneNumber  string `json:"phone_number"`
-		Email        string `json:"email"`
-	} `json:"user"`
+		ClientUserID string `json:"client_user_id,omitemtpy"`
+		FirstName    string `json:"first_name,omitemtpy"`
+		LastName     string `json:"last_name,omitemtpy"`
+		MiddleName   string `json:"middle_name,omitemtpy"`
+		Ssn          string `json:"ssn,omitemtpy"`
+		PhoneNumber  string `json:"phone_number,omitemtpy"`
+		Email        string `json:"email,omitemtpy"`
+	} `json:"user,omitemtpy"`
 }
 
 type CreateAssetReportResponse struct {
