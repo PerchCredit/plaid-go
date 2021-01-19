@@ -91,10 +91,27 @@ type GetAssetReportResponse struct {
 }
 
 type createAssetReportRequest struct {
-	ClientID      string   `json:"client_id"`
-	Secret        string   `json:"secret"`
-	AccessTokens  []string `json:"access_tokens"`
-	DaysRequested int      `json:"days_requested"`
+	ClientID      string                   `json:"client_id"`
+	Secret        string                   `json:"secret"`
+	AccessTokens  []string                 `json:"access_tokens"`
+	DaysRequested int                      `json:"days_requested"`
+	Options       CreateAssetReportOptions `json:"options"`
+}
+
+type CreateAssetReportOptions struct {
+	Options struct {
+		ClientReportID string `json:"client_report_id"`
+		Webhook        string `json:"webhook"`
+		User           struct {
+			ClientUserID string `json:"client_user_id"`
+			FirstName    string `json:"first_name"`
+			LastName     string `json:"last_name"`
+			MiddleName   string `json:"middle_name"`
+			Ssn          string `json:"ssn"`
+			PhoneNumber  string `json:"phone_number"`
+			Email        string `json:"email"`
+		} `json:"user"`
+	}
 }
 
 type CreateAssetReportResponse struct {
@@ -145,7 +162,7 @@ func (c *Client) GetAssetReport(assetReportToken string) (resp GetAssetReportRes
 	return resp, err
 }
 
-func (c *Client) CreateAssetReport(itemAccessTokens []string, daysRequested int) (resp CreateAssetReportResponse, err error) {
+func (c *Client) CreateAssetReport(itemAccessTokens []string, daysRequested int, options CreateAssetReportOptions) (resp CreateAssetReportResponse, err error) {
 	if itemAccessTokens == nil || len(itemAccessTokens) == 0 {
 		return resp, errors.New("/asset_report/create - asset report token must be specified")
 	}
@@ -155,6 +172,7 @@ func (c *Client) CreateAssetReport(itemAccessTokens []string, daysRequested int)
 		Secret:        c.secret,
 		AccessTokens:  itemAccessTokens,
 		DaysRequested: daysRequested,
+		Options:       options,
 	})
 
 	if err != nil {
