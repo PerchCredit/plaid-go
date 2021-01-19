@@ -99,19 +99,17 @@ type createAssetReportRequest struct {
 }
 
 type CreateAssetReportOptions struct {
-	Options struct {
-		ClientReportID string `json:"client_report_id"`
-		Webhook        string `json:"webhook"`
-		User           struct {
-			ClientUserID string `json:"client_user_id"`
-			FirstName    string `json:"first_name"`
-			LastName     string `json:"last_name"`
-			MiddleName   string `json:"middle_name"`
-			Ssn          string `json:"ssn"`
-			PhoneNumber  string `json:"phone_number"`
-			Email        string `json:"email"`
-		} `json:"user"`
-	}
+	ClientReportID string `json:"client_report_id"`
+	Webhook        string `json:"webhook"`
+	User           struct {
+		ClientUserID string `json:"client_user_id"`
+		FirstName    string `json:"first_name"`
+		LastName     string `json:"last_name"`
+		MiddleName   string `json:"middle_name"`
+		Ssn          string `json:"ssn"`
+		PhoneNumber  string `json:"phone_number"`
+		Email        string `json:"email"`
+	} `json:"user"`
 }
 
 type CreateAssetReportResponse struct {
@@ -162,7 +160,7 @@ func (c *Client) GetAssetReport(assetReportToken string) (resp GetAssetReportRes
 	return resp, err
 }
 
-func (c *Client) CreateAssetReport(itemAccessTokens []string, daysRequested int, options CreateAssetReportOptions) (resp CreateAssetReportResponse, err error) {
+func (c *Client) CreateAssetReportWithOptions(itemAccessTokens []string, daysRequested int, options CreateAssetReportOptions) (resp CreateAssetReportResponse, err error) {
 	if itemAccessTokens == nil || len(itemAccessTokens) == 0 {
 		return resp, errors.New("/asset_report/create - asset report token must be specified")
 	}
@@ -173,6 +171,26 @@ func (c *Client) CreateAssetReport(itemAccessTokens []string, daysRequested int,
 		AccessTokens:  itemAccessTokens,
 		DaysRequested: daysRequested,
 		Options:       options,
+	})
+
+	if err != nil {
+		return resp, err
+	}
+
+	err = c.Call("/asset_report/create", jsonBody, &resp)
+	return resp, err
+}
+
+func (c *Client) CreateAssetReport(itemAccessTokens []string, daysRequested int) (resp CreateAssetReportResponse, err error) {
+	if itemAccessTokens == nil || len(itemAccessTokens) == 0 {
+		return resp, errors.New("/asset_report/create - asset report token must be specified")
+	}
+
+	jsonBody, err := json.Marshal(createAssetReportRequest{
+		ClientID:      c.clientID,
+		Secret:        c.secret,
+		AccessTokens:  itemAccessTokens,
+		DaysRequested: daysRequested,
 	})
 
 	if err != nil {
