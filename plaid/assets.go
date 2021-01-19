@@ -3,6 +3,7 @@ package plaid
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 )
 
 type AssetReport struct {
@@ -172,6 +173,8 @@ func (c *Client) CreateAssetReportWithOptions(itemAccessTokens []string, daysReq
 		DaysRequested: daysRequested,
 		Options:       options,
 	})
+
+	fmt.Println(jsonBody)
 
 	if err != nil {
 		return resp, err
