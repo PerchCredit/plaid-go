@@ -3,7 +3,6 @@ package plaid
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 )
 
 type AssetReport struct {
@@ -100,17 +99,17 @@ type createAssetReportRequest struct {
 }
 
 type CreateAssetReportOptions struct {
-	ClientReportID string `json:"client_report_id,omitemtpy"`
-	Webhook        string `json:"webhook,omitemtpy"`
+	ClientReportID string `json:"client_report_id,omitempty"`
+	Webhook        string `json:"webhook,omitempty"`
 	User           struct {
-		ClientUserID string `json:"client_user_id,omitemtpy"`
-		FirstName    string `json:"first_name,omitemtpy"`
-		LastName     string `json:"last_name,omitemtpy"`
-		MiddleName   string `json:"middle_name,omitemtpy"`
-		Ssn          string `json:"ssn,omitemtpy"`
-		PhoneNumber  string `json:"phone_number,omitemtpy"`
-		Email        string `json:"email,omitemtpy"`
-	} `json:"user,omitemtpy"`
+		ClientUserID string `json:"client_user_id,omitempty"`
+		FirstName    string `json:"first_name,omitempty"`
+		LastName     string `json:"last_name,omitempty"`
+		MiddleName   string `json:"middle_name,omitempty"`
+		Ssn          string `json:"ssn,omitempty"`
+		PhoneNumber  string `json:"phone_number,omitempty"`
+		Email        string `json:"email,omitempty"`
+	} `json:"user,omitempty"`
 }
 
 type CreateAssetReportResponse struct {
@@ -173,8 +172,6 @@ func (c *Client) CreateAssetReportWithOptions(itemAccessTokens []string, daysReq
 		DaysRequested: daysRequested,
 		Options:       options,
 	})
-
-	fmt.Println(string(jsonBody))
 
 	if err != nil {
 		return resp, err
