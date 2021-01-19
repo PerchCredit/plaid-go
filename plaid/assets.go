@@ -174,7 +174,7 @@ func (c *Client) CreateAssetReportWithOptions(itemAccessTokens []string, daysReq
 		Options:       options,
 	})
 
-	fmt.Println(jsonBody)
+	fmt.Println(string(jsonBody))
 
 	if err != nil {
 		return resp, err
