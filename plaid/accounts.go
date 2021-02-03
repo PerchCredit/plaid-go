@@ -3,6 +3,8 @@ package plaid
 import (
 	"encoding/json"
 	"errors"
+
+	"github.com/perchcredit/alderson/currency"
 )
 
 type Account struct {
@@ -17,11 +19,11 @@ type Account struct {
 }
 
 type AccountBalances struct {
-	Available              float64 `json:"available"`
-	Current                float64 `json:"current"`
-	Limit                  float64 `json:"limit"`
-	ISOCurrencyCode        string  `json:"iso_currency_code"`
-	UnofficialCurrencyCode string  `json:"unofficial_currency_code"`
+	Available              float64                `json:"available"`
+	Current                float64                `json:"current"`
+	Limit                  float64                `json:"limit"`
+	ISOCurrencyCode        currency.CurrencyCode  `json:"iso_currency_code"`
+	UnofficialCurrencyCode UnofficialCurrencyCode `json:"unofficial_currency_code"`
 }
 
 type ACHNumber struct {
@@ -80,7 +82,7 @@ type getAccountsRequest struct {
 type GetAccountsResponse struct {
 	APIResponse
 	Accounts []Account `json:"accounts"`
-	Item Item `json:"item"`
+	Item     Item      `json:"item"`
 }
 
 type GetAccountsOptions struct {
