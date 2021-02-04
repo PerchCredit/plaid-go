@@ -52,8 +52,8 @@ type Transaction struct {
 	MerchantName string `json:"merchant_name"`
 	Name         string `json:"name"`
 
-	PaymentMeta    PaymentMeta `json:"payment_meta"`
-	PaymentChannel string      `json:"payment_channel"`
+	PaymentMeta    PaymentMeta    `json:"payment_meta"`
+	PaymentChannel PaymentChannel `json:"payment_channel"`
 
 	Pending              bool   `json:"pending"`
 	PendingTransactionID string `json:"pending_transaction_id"`
