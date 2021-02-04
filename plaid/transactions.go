@@ -5,6 +5,38 @@ import (
 	"errors"
 )
 
+type PaymentChannel string
+
+const (
+	paymentChannelDigital    PaymentChannel = "digital"
+	paymentChannelPlace      PaymentChannel = "place"
+	paymentChannelSpecial    PaymentChannel = "special"
+	paymentChannelUnresolved PaymentChannel = "unresolved"
+	paymentChannelOnline     PaymentChannel = "online"
+	paymentChannelInStore    PaymentChannel = "in_store"
+	paymentChannelOther      PaymentChannel = "other"
+)
+
+type paymentChannels struct {
+	Digital    PaymentChannel
+	Place      PaymentChannel
+	Special    PaymentChannel
+	Unresolved PaymentChannel
+	Online     PaymentChannel
+	InStore    PaymentChannel
+	Other      PaymentChannel
+}
+
+var PaymentChannels paymentChannels = paymentChannels{
+	Digital:    paymentChannelDigital,
+	Place:      paymentChannelPlace,
+	Special:    paymentChannelSpecial,
+	Unresolved: paymentChannelUnresolved,
+	Online:     paymentChannelOnline,
+	InStore:    paymentChannelInStore,
+	Other:      paymentChannelOther,
+}
+
 type Transaction struct {
 	AccountID              string   `json:"account_id"`
 	Amount                 float64  `json:"amount"`
