@@ -22,50 +22,49 @@ type AssetReportItem struct {
 	ItemID          string               `json:"item_id"`
 }
 
-type AssetReportAccount struct {
-	AccountID string `json:"account_id"`
-	Balances  struct {
-		Available              float64 `json:"available"`
-		Current                float64 `json:"current"`
-		IsoCurrencyCode        string  `json:"iso_currency_code"`
-		Limit                  int     `json:"limit"`
-		UnofficialCurrencyCode string  `json:"unofficial_currency_code"`
-	} `json:"balances"`
-	DaysAvailable      int `json:"days_available"`
-	HistoricalBalances []struct {
-		Current                float64 `json:"current"`
-		Date                   string  `json:"date"`
-		IsoCurrencyCode        string  `json:"iso_currency_code"`
-		UnofficialCurrencyCode string  `json:"unofficial_currency_code"`
-	} `json:"historical_balances"`
-	Mask         string `json:"mask"`
-	Name         string `json:"name"`
-	OfficialName string `json:"official_name"`
-	Owners       []struct {
-		Addresses []struct {
-			Data struct {
-				City       string `json:"city"`
-				Country    string `json:"country"`
-				PostalCode string `json:"postal_code"`
-				Region     string `json:"region"`
-				Street     string `json:"street"`
-			} `json:"data"`
-			Primary bool `json:"primary"`
-		} `json:"addresses"`
-		Emails []struct {
-			Data    string `json:"data"`
-			Primary bool   `json:"primary"`
-			Type    string `json:"type"`
-		} `json:"emails"`
-		Names        []string `json:"names"`
-		PhoneNumbers []struct {
-			Data    string `json:"data"`
-			Primary bool   `json:"primary"`
-			Type    string `json:"type"`
-		} `json:"phone_numbers"`
-	} `json:"owners"`
-	Subtype string `json:"subtype"`
+type AssetReportAccountOwner struct {
+	Addresses    []AssetReportAccountOwnerAddress     `json:"addresses"`
+	Emails       []AssetReportAccountOwnerEmail       `json:"emails"`
+	Names        []string                             `json:"names"`
+	PhoneNumbers []AssetReportAccountOwnerPhoneNumber `json:"phone_numbers"`
+}
+
+type AssetReportAccountOwnerAddress struct {
+	Data    AssetReportAccountOwnerAddressData `json:"data"`
+	Primary bool                               `json:"primary"`
+}
+
+type AssetReportAccountOwnerAddressData struct {
+	City       string `json:"city"`
+	Country    string `json:"country"`
+	PostalCode string `json:"postal_code"`
+	Region     string `json:"region"`
+	Street     string `json:"street"`
+}
+
+type AssetReportAccountOwnerEmail struct {
+	Data    string `json:"data"`
+	Primary bool   `json:"primary"`
 	Type    string `json:"type"`
+}
+
+type AssetReportAccountOwnerPhoneNumber struct {
+	Data    string `json:"data"`
+	Primary bool   `json:"primary"`
+	Type    string `json:"type"`
+}
+
+type AssetReportAccount struct {
+	Balances           AccountBalances           `json:"balances"`
+	HistoricalBalances []AccountBalances         `json:"historical_balances"`
+	AccountID          string                    `json:"account_id"`
+	DaysAvailable      int                       `json:"days_available"`
+	Mask               string                    `json:"mask"`
+	Name               string                    `json:"name"`
+	OfficialName       string                    `json:"official_name"`
+	Owners             []AssetReportAccountOwner `json:"owners"`
+	Subtype            string                    `json:"subtype"`
+	Type               string                    `json:"type"`
 }
 
 type AssetReportUser struct {
