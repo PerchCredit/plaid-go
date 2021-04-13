@@ -5,6 +5,47 @@ import (
 	"errors"
 )
 
+// Plaid Webhook Types
+// PlaidWebhook is basis of webhook return type
+type Webhook struct {
+
+	// Available on all Plaid Webhooks
+	WebhookType string        `json:"webhook_type"`
+	WebhookCode string        `json:"webhook_code"`
+	Error       *WebhookError `json:"error"`
+
+	// Assets
+	AssetReportID *string `json:"asset_report_id"`
+
+	// Available on Auth
+	AccountID *string `json:"account_id"`
+
+	// Available on Item, Transaction Webhooks
+	ItemID *string `json:"item_id"`
+
+	// Available on Item Webhooks
+	NewWebhookUrl         *string `json:"new_webhook_url"`
+	ConsentExpirationTime *string `json:"consent_expiration_time"`
+
+	// Available on Transaction Webhooks
+	NewTransactions     *int      `json:"new_transactions"`
+	RemovedTransactions *[]string `json:"removed_transactions"`
+}
+
+// PlaidWebhookError exists in all Plaid Webhooks
+type WebhookError struct {
+	DisplayMessage string `json:"display_message"`
+	ErrorCode      string `json:"error_code"`
+	ErrorMessage   string `json:"error_message"`
+	ErrorType      string `json:"error_type"`
+}
+
+// JWT Payload
+type JWTPayload struct {
+	IAT     int64  `json:"iat"`
+	BodySHA string `json:"request_body_sha256"`
+}
+
 type WebhookVerificationKey struct {
 	Alg       string `json:"alg"`
 	CreatedAt int64  `json:"created_at"`
